@@ -1,4 +1,4 @@
-import LogoImg from './Logo.jpg'
+import LogoImg from './Logo.png'
 import './GasolinaouEtanol.css'
 import {useState, FormEvent} from 'react'
 

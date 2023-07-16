@@ -1,5 +1,5 @@
 import "./ListadeTarefas.css"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo, useCallback } from "react"
 
 export default function ListadeTarefas() {
 
@@ -30,7 +30,7 @@ export default function ListadeTarefas() {
 		
 	}, [tasks])
 
-	function handleRegister() {
+	const handleRegister = useCallback(() => {
 		if(!input) {
 			alert("Preencha o nome da sua tarefa!")
 			return;
@@ -43,7 +43,8 @@ export default function ListadeTarefas() {
 
 		setTasks(tarefas => [...tarefas, input])
 		setInput("")
-	}
+	}, [input, tasks])
+
 
 	function handleSaveEdit(){
 		const findIndexTask = tasks.findIndex(task => task === editTask.task)
@@ -73,28 +74,33 @@ export default function ListadeTarefas() {
 		})
 	}
 
+	const totalTarefas = useMemo(() => {
+		return tasks.length
+	}, [tasks])
 
 	return(
 	  <div>
-		<h1>Lista de Tarefas</h1>
-		<input 
-			placeholder="Digite o nome da tarefa..."
-			value={input}
-			onChange={(e) =>setInput(e.target.value)}
-			ref={inputRef}
-		/>
-		<button onClick={handleRegister}>{editTask.enabled ? 'Atualizar Tarefa' : 'Adicionar Tarefa'}</button>
-
+	  	<h1>Lista de Tarefas</h1>
+		<div className="containerTitle">
+			<input 
+				placeholder="Digite o nome da tarefa..."
+				value={input}
+				onChange={(e) =>setInput(e.target.value)}
+				ref={inputRef}
+			/>
+			<button onClick={handleRegister}>{editTask.enabled ? 'Atualizar Tarefa' : 'Adicionar Tarefa'}</button>
+		</div>
 		<hr />
-		{tasks.map((item, index) => (
-			<section key={item}>
-				<span>{item}</span>
-				<div>
-					<button onClick={() => handleEdit(item)}>Editar</button>
-					<button onClick={() => handleDelete(item)}>Excluir</button>
-				</div>
-			</section>
-		))}
+		<strong><p>Você tem {totalTarefas} tarefas!</p></strong>
+			{tasks.map((item, index) => (
+				<section key={item}>
+					<span><p>{item}</p></span>
+					<div>
+						<button onClick={() => handleEdit(item)}>Editar</button>
+						<button onClick={() => handleDelete(item)}>Excluir</button>
+					</div>
+				</section>
+			))}
 	  </div>
 	)
   }

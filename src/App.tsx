@@ -1,10 +1,12 @@
 import "./App.css"
-import ListadeTarefas from "./pages/ListadeTarefas/ListadeTarefas";
+import {useState, useCallback} from 'react'
+import DescubraSuaIdade from "./pages/DescubraSuaIdade/DescubraSuaIdade"
 
 export default function App() {
+
   return(
-    <>
-      <ListadeTarefas />
-    </>
+    <div>
+      <DescubraSuaIdade />
+    </div>
   )
 }
