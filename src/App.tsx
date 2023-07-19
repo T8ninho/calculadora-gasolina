@@ -1,10 +1,11 @@
 import react from 'react'
+import { RouterProvider } from 'react-router-dom'
+
+import Router from './routes'
 
 export default function App() {
 
   return(
-    <div>
-      <h1>Criando Rotas</h1>
-    </div>
+    <RouterProvider router={Router} />
   )
 }
