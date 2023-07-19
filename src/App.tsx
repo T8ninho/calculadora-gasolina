@@ -1,12 +1,10 @@
-import "./App.css"
-import {useState, useCallback} from 'react'
-import DescubraSuaIdade from "./pages/DescubraSuaIdade/DescubraSuaIdade"
+import react from 'react'
 
 export default function App() {
 
   return(
     <div>
-      <DescubraSuaIdade />
+      <h1>Criando Rotas</h1>
     </div>
   )
 }
